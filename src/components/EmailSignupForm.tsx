@@ -2,18 +2,40 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { CheckCircle2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 export const EmailSignupForm = () => {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (firstName.trim() && email.trim()) {
-      setIsSubmitted(true);
-      // Here you would typically send the data to your backend
-      console.log('Signup:', { firstName, email });
+      setIsLoading(true);
+      
+      try {
+        const { error } = await supabase
+          .from('leads')
+          .insert({
+            first_name: firstName.trim(),
+            email: email.trim(),
+            user_agent: navigator.userAgent,
+            page_url: window.location.href
+          });
+
+        if (error) {
+          console.error('Error saving lead:', error);
+          return;
+        }
+
+        setIsSubmitted(true);
+      } catch (error) {
+        console.error('Error saving lead:', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -46,8 +68,8 @@ export const EmailSignupForm = () => {
           required
           className="sm:col-span-2"
         />
-        <Button type="submit" variant="cta" className="sm:col-span-3">
-          Get Early Access
+        <Button type="submit" variant="cta" className="sm:col-span-3" disabled={isLoading}>
+          {isLoading ? 'Saving...' : 'Get Early Access'}
         </Button>
       </form>
       <p className="mt-3 text-sm text-muted-foreground text-center">
