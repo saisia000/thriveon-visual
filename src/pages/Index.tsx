@@ -19,32 +19,32 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <header className="text-center py-12">
           <h1 className="text-4xl md:text-5xl font-bold text-primary">ThriveOn</h1>
         </header>
 
         <main>
-          {/* Hero Section */}
           <section id="hook" className="text-center mb-24">
             <h2 className="text-3xl md:text-4xl font-bold max-w-3xl mx-auto leading-tight mb-4">
-              From Overwhelmed to Connected. The AI Companion for Caregiving.
+              You’re caring for everyone. But who’s checking on you?
             </h2>
-            <p className="text-lg max-w-3xl mx-auto text-muted-foreground mb-8">
-              ThriveOn's multi-agent AI streamlines the stress of caregiving and rediscovers the joy of your relationship. 
-              Stop managing a crisis and start nurturing a connection.
+            <p className="text-lg max-w-3xl mx-auto text-muted-foreground mb-4">
+              ThriveOn is your private AI support system—built for caregivers who feel invisible, exhausted, and alone. You’re not broken. You’re just burnt out. Let’s reconnect you to yourself.
             </p>
-            
-            {/* Action buttons */}
+            <p className="text-lg max-w-2xl mx-auto text-primary font-medium mb-8" style={{ fontFamily: '"Caveat", cursive' }}>
+              Think of it like a team of tiny AI helpers — each tuned to your caregiving needs.
+            </p>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <Button 
+              <Button
                 variant="hero"
                 onClick={() => scrollToSection('signup-form-container')}
               >
                 Get Early Access
               </Button>
-              <Button 
+              <Button
                 variant="outline"
                 onClick={() => navigate('/demo')}
                 className="flex items-center gap-2"
@@ -53,7 +53,7 @@ const Index = () => {
                 Watch Demo
               </Button>
             </div>
-            
+
             {/* Video Player */}
             <div className="max-w-3xl mx-auto mb-10">
               <HeroVideoPlayer />
@@ -67,14 +67,14 @@ const Index = () => {
           <section id="social-proof" className="py-16 sm:py-24">
             <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
               You're managing schedules, medications, and a thousand tiny details.
-              <br className="hidden sm:inline" /> 
+              <br className="hidden sm:inline" />
               But who is managing the relationship?
             </h3>
             <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
               <Card className="border-l-4 border-l-primary shadow-lg">
                 <CardContent className="p-6">
                   <p className="text-muted-foreground italic text-lg mb-4">
-                    "Caregiving became all about logistics. I feel like I'm more of a project manager than a spouse. 
+                    "Caregiving became all about logistics. I feel like I'm more of a project manager than a spouse.
                     We've forgotten how to just talk."
                   </p>
                   <p className="font-bold text-right">- Steve, Caregiver</p>
@@ -137,15 +137,15 @@ const Index = () => {
           <section id="urgency" className="py-16 sm:py-24 text-center">
             <h3 className="text-3xl md:text-4xl font-bold mb-4">Join the Founding Members Circle</h3>
             <p className="text-lg max-w-2xl mx-auto text-muted-foreground mb-10">
-              Our mission is to help 1 million families thrive. We're starting with the first 5,000. 
+              Our mission is to help 1 million families thrive. We're starting with the first 5,000.
               Sign up by <strong>August 15th</strong> for free early access and a lifetime 30% discount when we launch.
             </p>
-            
+
             <div className="mb-10">
               <ProgressBar />
             </div>
 
-            <Button 
+            <Button
               variant="cta"
               onClick={() => scrollToSection('signup-form-container')}
             >
@@ -208,7 +208,7 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="text-center py-10 border-t border-border">
-          <p className="text-muted-foreground">&copy; 2025 ThriveOn. All rights reserved.</p>
+          <p className="text-muted-foreground">&copy; Built by Caregivers and Survivors @ThriveOn. All rights reserved.</p>
         </footer>
 
       </div>
