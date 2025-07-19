@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ThriveOn Design System - Warm Serenity Palette */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* ThriveOn Brand Colors */
+    --background: 46 33% 97%; /* F5F5F3 - Warm off-white */
+    --foreground: 60 2% 24%; /* 3C3C3B - Dark charcoal */
+    
+    /* Primary - ThriveOn Teal */
+    --primary: 174 44% 31%; /* 2D7A74 - Main teal */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 174 44% 27%; /* Darker teal for hover */
+    
+    /* Demo accent - Bright cyan */
+    --demo-accent: 177 91% 50%; /* 11ede6 */
+    
+    /* Warm neutrals */
+    --warm-50: 46 33% 97%;
+    --warm-100: 46 20% 92%;
+    --warm-200: 46 15% 85%;
+    --warm-600: 60 5% 45%;
+    
+    /* Semantic colors using warm palette */
+    --card: 0 0% 100%;
+    --card-foreground: 60 2% 24%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 60 2% 24%;
+    
+    --secondary: 46 20% 92%;
+    --secondary-foreground: 60 2% 24%;
+    
+    --muted: 46 15% 85%;
+    --muted-foreground: 60 5% 45%;
+    
+    --accent: 174 44% 31%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 46 15% 85%;
+    --input: 46 15% 85%;
+    --ring: 174 44% 31%;
+    
+    --radius: 0.75rem;
+    
+    /* ThriveOn specific design tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+    --warm-gradient: linear-gradient(180deg, hsl(var(--warm-50)), hsl(var(--warm-100)));
+    --shadow-warm: 0 10px 25px -3px hsl(var(--foreground) / 0.1);
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.15);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 60 2% 8%;
+    --foreground: 0 0% 95%;
+    --primary: 174 44% 40%;
+    --primary-foreground: 60 2% 8%;
+    --card: 60 2% 12%;
+    --card-foreground: 0 0% 95%;
+    --border: 60 2% 20%;
+    --input: 60 2% 20%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-medium;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold leading-tight;
+  }
+}
+
+@layer components {
+  /* Hero video container styles */
+  .hero-video-container {
+    @apply relative overflow-hidden bg-foreground shadow-lg;
+    aspect-ratio: 16 / 9;
+  }
+  
+  .video-scene {
+    @apply absolute inset-0 opacity-0 flex flex-col items-center justify-center text-center p-8;
+    transition: opacity 0.8s ease-in-out;
+  }
+  
+  .video-scene.active {
+    @apply opacity-100;
+  }
+  
+  .scene-text {
+    @apply text-white text-xl md:text-2xl font-semibold opacity-0 max-w-[80%];
+    transition: opacity 0.8s ease-in-out 0.5s;
+  }
+  
+  .video-scene.active .scene-text {
+    @apply opacity-100;
+  }
+  
+  .play-button-overlay {
+    @apply cursor-pointer bg-black/40 hover:bg-black/60;
+    transition: background-color 0.3s ease;
+  }
+  
+  .play-button-triangle {
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid white;
+    margin-left: 5px;
+  }
+  
+  .final-cta-scene {
+    background-color: hsl(var(--primary));
+  }
+  
+  /* Progress bar animations */
+  .progress-bar {
+    background: var(--hero-gradient);
+    transition: width 0.5s ease-out;
+  }
+  
+  /* Demo page specific styles */
+  .demo-container {
+    @apply relative overflow-hidden border-2 border-foreground shadow-xl;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+  }
+  
+  .demo-photo {
+    @apply absolute inset-0 w-full h-full bg-cover bg-center;
+    background-image: url('https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=2070&auto=format&fit=crop');
+    transition: filter 2s ease-in-out;
+  }
+  
+  .demo-fog {
+    @apply absolute inset-0 flex items-center justify-center text-center opacity-0;
+    background-color: rgba(1, 18, 38, 0.7);
+    animation: fadeInFog 5s 2s forwards;
+  }
+  
+  .demo-fog-text {
+    @apply absolute font-semibold opacity-0;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: rgba(247, 250, 230, 0.3);
+    animation: swirl 15s infinite linear, fadeInText 3s forwards;
+  }
+  
+  .demo-headline {
+    @apply absolute bottom-[5%] w-full text-center font-bold text-white opacity-0;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    animation: headlineFade 4s forwards;
+  }
+  
+  .demo-solution {
+    @apply absolute inset-0 opacity-0;
+    animation: fadeInSolution 1s 12s forwards, wipeCircle 4s 13s forwards ease-out;
+    clip-path: circle(0% at 50% 50%);
+  }
+  
+  .demo-icon {
+    @apply absolute top-1/2 left-1/2 w-20 h-20 rounded-full flex items-center justify-center text-4xl font-bold;
+    transform: translate(-50%, -50%);
+    background-color: hsl(var(--demo-accent));
+    color: hsl(var(--foreground));
+    box-shadow: 0 0 20px hsl(var(--demo-accent));
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+}
+
+/* Demo animations */
+@keyframes fadeInFog {
+  to { opacity: 1; }
+}
+
+@keyframes fadeInText {
+  to { opacity: 1; }
+}
+
+@keyframes swirl {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(10px, 20px) rotate(5deg); }
+  50% { transform: translate(0, -15px) rotate(0deg); }
+  75% { transform: translate(-15px, 10px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes headlineFade {
+  0% { opacity: 0; transform: translateY(20px); }
+  25% { opacity: 1; transform: translateY(0); }
+  75% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+@keyframes fadeInSolution {
+  to { opacity: 1; }
+}
+
+@keyframes wipeCircle {
+  to { clip-path: circle(150% at 50% 50%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
