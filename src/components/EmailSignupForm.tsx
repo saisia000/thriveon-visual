@@ -33,7 +33,7 @@ export const EmailSignupForm = () => {
         fetch('https://hooks.zapier.com/hooks/catch/23865732/u2p3q6a/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({ lead: payload })
         });
 
         setIsSubmitted(true);
