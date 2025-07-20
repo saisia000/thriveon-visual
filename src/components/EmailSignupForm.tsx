@@ -30,7 +30,7 @@ export const EmailSignupForm = () => {
         }
 
         // Send to Zapier webhook
-        await fetch('https://hooks.zapier.com/hooks/catch/23865732/u2p3q6a/', {
+        fetch('https://hooks.zapier.com/hooks/catch/23865732/u2p3q6a/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
