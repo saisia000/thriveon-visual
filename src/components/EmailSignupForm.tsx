@@ -14,7 +14,7 @@ export const EmailSignupForm = () => {
     e.preventDefault();
     if (firstName.trim() && email.trim()) {
       setIsLoading(true);
-      
+
       try {
         const { error } = await supabase
           .from('leads')
@@ -29,6 +29,19 @@ export const EmailSignupForm = () => {
           console.error('Error saving lead:', error);
           return;
         }
+
+        await fetch('https://hooks.zapier.com/hooks/catch/23865732/u2p3q6a/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            first_name: firstName.trim(),
+            email: email.trim(),
+            user_agent: navigator.userAgent,
+            page_url: window.location.href
+          }),
+        });
 
         setIsSubmitted(true);
       } catch (error) {
