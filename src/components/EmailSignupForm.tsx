@@ -15,42 +15,36 @@ export const EmailSignupForm = () => {
     if (firstName.trim() && email.trim()) {
       setIsLoading(true);
 
-      try {
-        const { error } = await supabase
-          .from('leads')
-          .insert({
-            first_name: firstName.trim(),
-            email: email.trim(),
-            user_agent: navigator.userAgent,
-            page_url: window.location.href
-          });
+      const payload = {
+        first_name: firstName.trim(),
+        email: email.trim(),
+        user_agent: navigator.userAgent,
+        page_url: window.location.href
+      };
 
+      try {
+        // Save to Supabase
+        const { error } = await supabase.from('leads').insert(payload);
         if (error) {
-          console.error('Error saving lead:', error);
-          return;
+          console.error('Error saving lead to Supabase:', error);
         }
 
+        // Send to Zapier webhook
         await fetch('https://hooks.zapier.com/hooks/catch/23865732/u2p3q6a/', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            first_name: firstName.trim(),
-            email: email.trim(),
-            user_agent: navigator.userAgent,
-            page_url: window.location.href
-          }),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
 
         setIsSubmitted(true);
       } catch (error) {
-        console.error('Error saving lead:', error);
+        console.error('Submission error:', error);
       } finally {
         setIsLoading(false);
       }
     }
   };
+
 
   if (isSubmitted) {
     return (
